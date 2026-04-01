@@ -1,0 +1,370 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== POCKET: FONTS ===== */
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/assets/fonts/PlayfairDisplay-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson Pro";
+  src: url("/assets/fonts/CrimsonPro-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== POCKET: DESIGN TOKENS ===== */
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Core Palette (OKLCH: L C H) */
+    /* Rich Burgundy */
+    --background: 0.93 0.018 60;
+    /* Sandstone warm */
+    --foreground: 0.22 0.04 30;
+    /* Deep warm brown text */
+
+    --card: 0.97 0.012 55;
+    /* Warm cream surface */
+    --card-foreground: 0.22 0.04 30;
+
+    --popover: 0.97 0.012 55;
+    --popover-foreground: 0.22 0.04 30;
+
+    /* Rich Burgundy primary */
+    --primary: 0.37 0.13 15;
+    --primary-foreground: 0.97 0.01 60;
+
+    /* Rare Blush secondary */
+    --secondary: 0.85 0.06 10;
+    --secondary-foreground: 0.37 0.13 15;
+
+    --muted: 0.90 0.02 55;
+    --muted-foreground: 0.52 0.04 30;
+
+    /* Gold accent */
+    --accent: 0.80 0.09 80;
+    --accent-foreground: 0.22 0.04 30;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.85 0.025 40;
+    --input: 0.90 0.02 55;
+    --ring: 0.37 0.13 15;
+
+    /* Charts */
+    --chart-1: 0.37 0.13 15;
+    --chart-2: 0.85 0.06 10;
+    --chart-3: 0.72 0.09 80;
+    --chart-4: 0.60 0.08 200;
+    --chart-5: 0.50 0.12 300;
+
+    /* Sidebar - Dark Burgundy */
+    --sidebar: 0.28 0.10 15;
+    --sidebar-foreground: 0.93 0.018 60;
+    --sidebar-primary: 0.80 0.09 80;
+    --sidebar-primary-foreground: 0.22 0.04 30;
+    --sidebar-accent: 0.37 0.13 15;
+    --sidebar-accent-foreground: 0.93 0.018 60;
+    --sidebar-border: 0.35 0.08 15;
+    --sidebar-ring: 0.72 0.09 80;
+
+    /* Custom Pocket tokens */
+    --pocket-burgundy: oklch(0.37 0.13 15);
+    --pocket-burgundy-deep: oklch(0.28 0.10 15);
+    --pocket-blush: oklch(0.85 0.06 10);
+    --pocket-sandstone: oklch(0.82 0.04 70);
+    --pocket-cream: oklch(0.97 0.012 55);
+    --pocket-gold: oklch(0.72 0.09 80);
+    --pocket-text: oklch(0.22 0.04 30);
+    --pocket-text-muted: oklch(0.52 0.04 30);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "General Sans", sans-serif;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "Playfair Display", serif;
+    letter-spacing: -0.01em;
+  }
+
+  blockquote, .font-serif {
+    font-family: "Instrument Serif", serif;
+  }
+}
+
+/* ===== POCKET: CUSTOM COMPONENTS ===== */
+@layer components {
+  .pocket-sidebar {
+    background: var(--pocket-burgundy-deep);
+    color: var(--pocket-cream);
+  }
+
+  .pocket-section-header {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    color: var(--pocket-burgundy);
+    position: relative;
+  }
+
+  .pocket-section-header::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 3rem;
+    background: var(--pocket-gold);
+    margin-top: 0.5rem;
+    border-radius: 9999px;
+  }
+
+  .pocket-card {
+    background: var(--pocket-cream);
+    border: 1px solid oklch(0.85 0.025 40);
+    border-radius: 1rem;
+    box-shadow:
+      0 1px 3px oklch(0.37 0.13 15 / 0.06),
+      0 4px 12px oklch(0.37 0.13 15 / 0.04);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .pocket-card:hover {
+    box-shadow:
+      0 2px 8px oklch(0.37 0.13 15 / 0.10),
+      0 8px 24px oklch(0.37 0.13 15 / 0.07);
+    transform: translateY(-1px);
+  }
+
+  .pocket-btn-primary {
+    background: var(--pocket-burgundy);
+    color: var(--pocket-cream);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    font-family: "General Sans", sans-serif;
+    transition: background 0.15s ease, opacity 0.15s ease;
+  }
+
+  .pocket-btn-primary:hover {
+    background: oklch(0.32 0.11 15);
+  }
+
+  .pocket-btn-ghost {
+    color: var(--pocket-burgundy);
+    background: transparent;
+    border: 1px solid var(--pocket-blush);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    transition: background 0.15s ease;
+  }
+
+  .pocket-btn-ghost:hover {
+    background: var(--pocket-blush);
+    opacity: 0.8;
+  }
+
+  .pocket-input {
+    background: oklch(0.96 0.01 55);
+    border: 1px solid oklch(0.84 0.025 40);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    color: var(--pocket-text);
+    font-family: "General Sans", sans-serif;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .pocket-input:focus {
+    outline: none;
+    border-color: var(--pocket-burgundy);
+    box-shadow: 0 0 0 3px oklch(0.37 0.13 15 / 0.12);
+  }
+
+  .pocket-badge-blush {
+    background: var(--pocket-blush);
+    color: var(--pocket-burgundy);
+    padding: 0.15rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .pocket-badge-gold {
+    background: oklch(0.92 0.06 80);
+    color: oklch(0.40 0.06 75);
+    padding: 0.15rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .pocket-quadrant {
+    border: 1px solid oklch(0.84 0.025 40);
+    border-radius: 1rem;
+    background: var(--pocket-cream);
+    min-height: 200px;
+  }
+
+  /* Pomodoro Timer */
+  .pomodoro-ring {
+    stroke: var(--pocket-burgundy);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s linear;
+  }
+
+  /* Flashcard flip */
+  .flashcard-inner {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    position: relative;
+  }
+
+  .flashcard-inner.flipped {
+    transform: rotateY(180deg);
+  }
+
+  .flashcard-face {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .flashcard-back {
+    transform: rotateY(180deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  /* Mood emojis */
+  .mood-btn {
+    transition: transform 0.15s ease, filter 0.15s ease;
+    cursor: pointer;
+    font-size: 1.75rem;
+    filter: grayscale(0.3);
+  }
+
+  .mood-btn:hover, .mood-btn.selected {
+    transform: scale(1.2);
+    filter: grayscale(0);
+  }
+
+  /* Habit dot grid */
+  .habit-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+  }
+
+  /* Poem card */
+  .poem-text {
+    font-family: "Instrument Serif", serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--pocket-text);
+    white-space: pre-wrap;
+  }
+
+  /* Kanban column */
+  .kanban-col {
+    background: oklch(0.94 0.018 60);
+    border-radius: 1rem;
+    min-height: 300px;
+    border: 1px solid oklch(0.87 0.022 50);
+  }
+
+  /* Timeline */
+  .timeline-line {
+    position: absolute;
+    left: 1.25rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--pocket-burgundy), var(--pocket-blush));
+  }
+
+  /* Masonry grid */
+  .masonry-grid {
+    columns: 2;
+    column-gap: 1rem;
+  }
+
+  .masonry-grid > * {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .masonry-grid {
+      columns: 3;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .masonry-grid {
+      columns: 4;
+    }
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: oklch(0.92 0.016 60);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.72 0.07 15);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.50 0.10 15);
+  }
+}
+
+/* Shimmer animation for AI loading states */
+@keyframes shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
